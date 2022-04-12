@@ -6,9 +6,9 @@ namespace Week1_Homework.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public Categories Category { get; set; }
+        public CategoriesEnum Category { get; set; }
         public decimal Price { get; set; }
-        public Colors Color { get; set; }
+        public ColorsEnum Color { get; set; }
         public string Explanation { get; set; }
     }
 }

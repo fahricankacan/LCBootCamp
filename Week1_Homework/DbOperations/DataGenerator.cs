@@ -19,35 +19,35 @@ namespace Week1_Homework.DbOperations
                     new Entities.Tshirt
                     {
                         Id = 1,
-                        Category = Common.Categories.Çocuk,
-                        Color = Common.Colors.red,
+                        Category = Common.CategoriesEnum.Child,
+                        Color = Common.ColorsEnum.red,
                         Title = "Kımrızı çocuk tshirt",
                         Price = 19.99m,
                         Explanation = "Yeni sezon kırmızı çocuk tshirt.",
-                        Size = Common.ChildSizeEnum.fiveToSix.ToString(),
+                        Size = Common.SizeEnum.S,
                         
 
                     },
                     new Entities.Tshirt
                     {
                         Id = 2,
-                        Category = Common.Categories.Çocuk,
-                        Color = Common.Colors.blue,
+                        Category = Common.CategoriesEnum.Child,
+                        Color = Common.ColorsEnum.blue,
                         Title = "Bisiklet Yaka Baskılı Kısa Kollu Erkek Çocuk Tişört",
                         Price = 39.99m,
                         Explanation = "Yeni sezon  çocuk tshirt.",
-                        Size = Common.ChildSizeEnum.EightToNine.ToString(),
+                        Size = Common.SizeEnum.S,
 
                     },
                     new Entities.Tshirt
                     {
                         Id = 3,
-                        Category = Common.Categories.Erkek,
-                        Color = Common.Colors.green,
+                        Category = Common.CategoriesEnum.Man,
+                        Color = Common.ColorsEnum.green,
                         Title = "LCW BASIC Bisiklet Yaka Kısa Kollu Penye Erkek Tişört",
                         Price = 59.99m,
                         Explanation = "Pamuklu penye kumaştan kısa kollu tişört.",
-                        Size = Common.SizeEnum.M.ToString(),
+                        Size = Common.SizeEnum.M,
 
 
                     },
@@ -55,12 +55,12 @@ namespace Week1_Homework.DbOperations
 
                     {
                         Id = 4,
-                        Category = Common.Categories.Kadın,
-                        Color = Common.Colors.white,
+                        Category = Common.CategoriesEnum.Woman,
+                        Color = Common.ColorsEnum.white,
                         Title = "LCW BASIC V Yaka Düz Kısa Kollu Kadın Pamuklu Tişört",
                         Price = 49.99m,
                         Explanation = "%100 pamuklu kumaştan.",
-                        Size = Common.SizeEnum.S.ToString(),
+                        Size = Common.SizeEnum.S,
 
 
 
@@ -68,12 +68,12 @@ namespace Week1_Homework.DbOperations
                      new Entities.Tshirt
                      {
                          Id = 5,
-                         Category = Common.Categories.Kadın,
-                         Color = Common.Colors.black,
+                         Category = Common.CategoriesEnum.Woman,
+                         Color = Common.ColorsEnum.black,
                          Title = "LCW BASIC V Yaka Düz Kısa Kollu Kadın Pamuklu Tişört",
                          Price = 49.99m,
                          Explanation = "%100 pamuklu kumaştan.",
-                         Size = Common.SizeEnum.L.ToString(),
+                         Size = Common.SizeEnum.L,
                      }
                     );
 

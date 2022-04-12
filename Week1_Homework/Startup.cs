@@ -11,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Week1_Homework.DbOperations;
 
@@ -29,7 +31,11 @@ namespace Week1_Homework
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Week1_Homework", Version = "v1" });
@@ -38,6 +44,7 @@ namespace Week1_Homework
 
 
             #region Services
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddDbContext<ClothingShopDbContext>(options => options.UseInMemoryDatabase
           (databaseName: "ClothingShopDb"));
             services.AddScoped<IClothingShopDbContext>(provider => provider.GetService<ClothingShopDbContext>());

@@ -1,19 +1,19 @@
 ﻿namespace Week1_Homework.Common
 {
 
-    public enum Categories
+    public enum CategoriesEnum
     {
-        Kadın,
-        Erkek,
-        Çocuk,
-        Bebek,
-        Ayakkabı,
-        Aksesuar,
-        EvVeYaşam,
-        Markalar,
-        WaikikiLand,
-        DogayaDuyarli,
-        Outlet
+        Woman,
+        Man,
+        Child,
+        Baby,
+        Shoe,
+        Accessory,
+        //EvVeYasam,
+        //Markalar,
+        //WaikikiLand,
+        //DogayaDuyarli,
+        //Outlet
     }
 
 }

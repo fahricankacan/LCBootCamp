@@ -1,7 +1,7 @@
 ﻿namespace Week1_Homework.Common
 {
 
-    public enum Colors
+    public enum ColorsEnum
     {
         red,
         green,
