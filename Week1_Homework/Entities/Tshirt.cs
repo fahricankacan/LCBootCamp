@@ -5,7 +5,7 @@ namespace Week1_Homework.Entities
 {
     public class Tshirt:Clothes
     {
-        [JsonConverter(typeof(JsonStringEnumConverter))]
+        //[JsonConverter(typeof(JsonStringEnumConverter))]
         public SizeEnum Size { get; set; }
     }
 }

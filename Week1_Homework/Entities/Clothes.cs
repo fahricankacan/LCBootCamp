@@ -7,10 +7,10 @@ namespace Week1_Homework.Entities
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        [JsonConverter(typeof(JsonStringEnumConverter))]
+        //[JsonConverter(typeof(JsonStringEnumConverter))]
         public CategoriesEnum Category { get; set; }
         public decimal Price { get; set; }
-        [JsonConverter(typeof(JsonStringEnumConverter))]
+        //[JsonConverter(typeof(JsonStringEnumConverter))]
         public ColorsEnum Color { get; set; }
         public string Explanation { get; set; }
     }

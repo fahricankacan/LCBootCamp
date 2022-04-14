@@ -4,6 +4,8 @@ using System.Collections;
 using System.Linq;
 using Week1_Homework.Common;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+
 
 namespace Week1_Homework.Application.TshirtOperations.Queries.GetAll
 {
@@ -18,10 +20,10 @@ namespace Week1_Homework.Application.TshirtOperations.Queries.GetAll
             _mapper = mapper;
         }
 
-        
-        public IEnumerable<TshirtGetAllQueryViewModel> Handle()
+
+        public async Task<IEnumerable<TshirtGetAllQueryViewModel>> Handle()
         {
-            var allTshirts = _clothingShopDbContext.Tshirts;
+            var allTshirts =  _clothingShopDbContext.Tshirts;
             List<TshirtGetAllQueryViewModel> tshirtViewModelList = new List<TshirtGetAllQueryViewModel>();
 
             foreach (var tshirt in allTshirts)
@@ -29,7 +31,7 @@ namespace Week1_Homework.Application.TshirtOperations.Queries.GetAll
                 tshirtViewModelList.Add(_mapper.Map<TshirtGetAllQueryViewModel>(tshirt));
             }
 
-            return tshirtViewModelList;
+            return await Task.FromResult(tshirtViewModelList);
         }
 
     }

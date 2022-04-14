@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Week1_Homework.Common;
 using Week1_Homework.DbOperations;
 
@@ -9,16 +11,17 @@ namespace Week1_Homework.Application.TshirtOperations.Commands.Update
     public class UpdateTshirtCommand
     {
         private readonly IClothingShopDbContext _clothingShopDbContext;
-        
+       
+
         public UpdateTshirtCommand(IClothingShopDbContext clothingShopDbContext)
         {
             _clothingShopDbContext = clothingShopDbContext;
             
         }
 
-        public void Handle(int tshirtId,UpdateTshirtViewModel updateTshirtViewModel)
+        public async Task Handle(int tshirtId,UpdateTshirtViewModel updateTshirtViewModel)
         {
-            var tshirt = _clothingShopDbContext.Tshirts.SingleOrDefault(t=>t.Id==tshirtId);
+            var tshirt =await _clothingShopDbContext.Tshirts.SingleOrDefaultAsync(t=>t.Id==tshirtId);
 
             if(tshirt is null)
             {
@@ -44,10 +47,9 @@ namespace Week1_Homework.Application.TshirtOperations.Commands.Update
             tshirt.Explanation= (updateTshirtViewModel.Explanation==default)?tshirt.Explanation:updateTshirtViewModel.Explanation;
 
             _clothingShopDbContext.Tshirts.Update(tshirt);
-
-            _clothingShopDbContext.SaveChanges();
            
-                     
+            await _clothingShopDbContext.SaveChangesAsync();
+                                        
         }
 
     }

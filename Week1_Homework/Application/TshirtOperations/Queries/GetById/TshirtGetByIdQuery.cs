@@ -3,6 +3,7 @@ using Week1_Homework.DbOperations;
 using System;
 using Week1_Homework.Common;
 using AutoMapper;
+using System.Threading.Tasks;
 
 namespace Week1_Homework.Application.TshirtOperations.Queries.GetById
 {
@@ -17,7 +18,7 @@ namespace Week1_Homework.Application.TshirtOperations.Queries.GetById
             _mapper = mapper;
         }
 
-        public TshirtGetByIdQueryViewModel Handle(int id)
+        public async Task<TshirtGetByIdQueryViewModel> Handle(int id)
         {
             var tshirt = _clothingShopDbContext.Tshirts.SingleOrDefault(p=>p.Id==id);
 
@@ -25,9 +26,8 @@ namespace Week1_Homework.Application.TshirtOperations.Queries.GetById
             {
                 throw new InvalidOperationException("Tshirt bulunamadı.");
             }
-
-            //TshirtViewModel tshirtViewModel = new TshirtViewModel();
-            return _mapper.Map<TshirtGetByIdQueryViewModel>(tshirt);
+            
+            return await Task.FromResult(_mapper.Map<TshirtGetByIdQueryViewModel>(tshirt));
             
         }
 

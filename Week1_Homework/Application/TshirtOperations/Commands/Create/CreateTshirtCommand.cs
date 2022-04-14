@@ -5,6 +5,7 @@ using Week1_Homework.Common;
 using System;
 using AutoMapper;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace Week1_Homework.Application.TshirtOperations.Commands.Create
 {
@@ -19,7 +20,7 @@ namespace Week1_Homework.Application.TshirtOperations.Commands.Create
             _mapper = mapper;
         }
 
-        public void Handle (CreateTshirViewModel tshirtViewModel)
+        public async Task Handle (CreateTshirViewModel tshirtViewModel)
         {
           
             if(Enum.IsDefined(typeof(ColorsEnum), tshirtViewModel.Color) is false)
@@ -39,7 +40,7 @@ namespace Week1_Homework.Application.TshirtOperations.Commands.Create
             tshirt = _mapper.Map<Tshirt>(tshirtViewModel);
 
             _clothingShopDbContext.Tshirts.Add(tshirt);
-            _clothingShopDbContext.SaveChanges();
+            await _clothingShopDbContext.SaveChangesAsync();
         }
 
       

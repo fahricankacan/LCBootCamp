@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Week1_Homework.DbOperations;
 using System;
+using System.Threading.Tasks;
 
 namespace Week1_Homework.Application.TshirtOperations.Commands.Delete
 {
@@ -13,7 +14,7 @@ namespace Week1_Homework.Application.TshirtOperations.Commands.Delete
             _clothingShopDbContext = clothingShopDbContext;
         }
 
-        public void Handle(int id)
+        public async Task Handle(int id)
         {
             var tshirt = _clothingShopDbContext.Tshirts.SingleOrDefault(p => p.Id == id);
 
@@ -24,7 +25,7 @@ namespace Week1_Homework.Application.TshirtOperations.Commands.Delete
 
             _clothingShopDbContext.Tshirts.Remove(tshirt);
 
-            _clothingShopDbContext.SaveChanges();
+            await _clothingShopDbContext.SaveChangesAsync();
             
         }
     }
