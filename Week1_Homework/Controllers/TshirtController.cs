@@ -45,7 +45,7 @@ namespace Week1_Homework.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetById(int id)
+        public async Task<ActionResult> GetTshirtById(int id)
         {
             TshirtGetByIdQuery query = new(_clothingShopDbContext, _mapper);
             TshirtGetByIdQueryValidator validator = new(id);
