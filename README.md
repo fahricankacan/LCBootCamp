@@ -1,4 +1,4 @@
-d# LCBootCamp 1. Hafta Ödevim
+# LCBootCamp 1. Hafta Ödevim
 
 Bir internet sitesindeki tshirt kategorisini örnek alarak bir web api oluşturdum.
 
