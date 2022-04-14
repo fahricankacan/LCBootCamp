@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\TshirtOperations\Queries\" />
+    <Folder Include="Application\TshirtOperations\Queries\Search\" />
   </ItemGroup>
 
 </Project>

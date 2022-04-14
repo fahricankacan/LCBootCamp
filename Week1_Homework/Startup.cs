@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Week1_Homework.DbOperations;
+using Week1_Homework.Middlewares;
 
 namespace Week1_Homework
 {
@@ -35,6 +36,8 @@ namespace Week1_Homework
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues = true;
+                options.JsonSerializerOptions.PropertyNameCaseInsensitive = false;
+
             });
             services.AddSwaggerGen(c =>
             {
@@ -64,6 +67,8 @@ namespace Week1_Homework
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCustomExceptionMiddle();
 
             app.UseAuthorization();
 

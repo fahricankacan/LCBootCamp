@@ -1,19 +1,17 @@
 ﻿using FluentValidation;
-using Week1_Homework.Common;
 
-namespace Week1_Homework.Application.TshirtOperations.Commands.Create
+namespace Week1_Homework.Application.TshirtOperations.Commands.Update
 {
-    public class CreateTshirtCommandValidator : AbstractValidator<CreateTshirViewModel>
+    public class UpdateTshirtCommandValidator:AbstractValidator<UpdateTshirtViewModel>
     {
-        public CreateTshirtCommandValidator()
+        public UpdateTshirtCommandValidator(int id)
         {
-
+            RuleFor(c => id).NotNull().GreaterThan(0);
             RuleFor(c => c.Price).GreaterThan(0);
             RuleFor(c => c.Title).NotNull().MinimumLength(3);
             RuleFor(c => c.Color).IsInEnum();
             RuleFor(c => c.Category).NotNull().IsInEnum();
             RuleFor(c => c.Size).NotNull().IsInEnum();
-                             
         }
     }
 }

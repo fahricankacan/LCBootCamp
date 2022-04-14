@@ -4,6 +4,7 @@ using System.Linq;
 using Week1_Homework.Common;
 using System;
 using AutoMapper;
+using System.Text.Json.Serialization;
 
 namespace Week1_Homework.Application.TshirtOperations.Commands.Create
 {
@@ -45,9 +46,13 @@ namespace Week1_Homework.Application.TshirtOperations.Commands.Create
     }
     public class CreateTshirViewModel
     {
+
         public string Title { get; set; }
+        //[JsonConverter(typeof(JsonStringEnumConverter))] I added "strinenumconverter" options in startup class to addController service.
         public CategoriesEnum Category { get; set; }
+        //[JsonConverter(typeof(JsonStringEnumConverter))]
         public ColorsEnum Color { get; set; }
+        ///[JsonConverter(typeof(JsonStringEnumConverter))]
         public SizeEnum Size { get; set; }
         public decimal Price { get; set; }
         public string Explanation { get; set; }
