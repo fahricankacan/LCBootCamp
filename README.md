@@ -27,26 +27,26 @@ Bir internet sitesindeki tshirt kategorisini örnek alarak bir web api oluşturd
 # API 
 
 ## GetTshirts
-![GetTshirtPicture](photo\getall.png)
+![GetTshirtPicture](photo/getall.png)
 
 ## GetTshirtById
-![GetTshirtByIdPicture](photo\getbyid.png)
+![GetTshirtByIdPicture](photo/getbyid.png)
 
 ## GetSearchedTshirt
-![GetSearchedTshirt](photo\1search.png)
-![GetSearchedTshirt2](photo\2search.png)
+![GetSearchedTshirt](photo/1search.png)
+![GetSearchedTshirt2](photo/2search.png)
 
 
 ## UpdateTshirt
-![UpdateTshirt](photo\put.png)
+![UpdateTshirt](photo/put.png)
  
 ## CreateTshirt
-![UpdateTshirt](photo\create.png)
+![UpdateTshirt](photo/create.png)
 ## DeleteTshirt
-![UpdateTshirt](photo\delete.png)
+![UpdateTshirt](photo/delete.png)
 
 
 ## Entites
-![entity1](photo\entity1.png)
-![entity1](photo\entity2.png)
+![entity1](photo/entity1.png)
+![entity1](photo/entity2.png)
 
