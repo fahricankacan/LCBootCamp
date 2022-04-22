@@ -1,0 +1,34 @@
+﻿using AutoMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Week2.Application.Repositories.CategoryRepository;
+
+
+namespace Week2.Application.Features.Queries.CategoryQueries.GetAllCategories
+{
+
+    public class GetAllCategoriesQuery : IRequestHandler<GetAllCategoriesQueryRequest, IEnumerable<GetAllCategoriesQueryResponse>>
+    {
+        private readonly ICategoryReadRepository _categoryReadRepository;
+        private readonly IMapper _mapper;
+
+        public GetAllCategoriesQuery(ICategoryReadRepository categoryReadRepository, IMapper mapper)
+        {
+            _categoryReadRepository = categoryReadRepository;
+            _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<GetAllCategoriesQueryResponse>> Handle(GetAllCategoriesQueryRequest request, CancellationToken cancellationToken)
+        {
+            var categories = await _categoryReadRepository.GetAll().ToListAsync();
+
+           return _mapper.Map<List<GetAllCategoriesQueryResponse>>(categories);
+        }
+    }
+
+}

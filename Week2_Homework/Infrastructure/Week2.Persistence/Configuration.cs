@@ -14,7 +14,7 @@ namespace Week2.Persistence
         { get 
             {
                 ConfigurationManager configurationManager = new ConfigurationManager();
-                configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Persistence/Week2.API"));
+                configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../../Presentation/Week2.API"));
                 configurationManager.AddJsonFile("appsettings.json");
 
                 return configurationManager.GetConnectionString("MicrosoftSqlServer");

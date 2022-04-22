@@ -11,6 +11,6 @@ namespace Week2.Domain.Entities
     {
         public int Quantity { get; set; }
 
-        ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
     }
 }

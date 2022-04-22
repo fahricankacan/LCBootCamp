@@ -18,7 +18,8 @@ namespace Week2.Domain.Configuration
 
             entity.HasMany(e => e.Products)
                 .WithOne(e => e.Category)
-                .HasForeignKey(e => e.CategoryId);
+                .HasForeignKey(e => e.CategoryId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
