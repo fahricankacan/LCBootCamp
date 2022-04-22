@@ -34,12 +34,13 @@ namespace Week2.Application.Features.Commands.InventoryCommands.UpdateInventory
             }
 
             inventory.Quantity = request.Quantity;
-            _ınventoryWriteRepository.SaveAsync();
+            _ınventoryWriteRepository.Update(inventory);
+            var result = await _ınventoryWriteRepository.SaveAsync();
 
             return new UpdateInventoryCommandResponse
             {
-                Success = true,
-                Message = "Inventory updated"
+                Success = result == 1 ? true : false,
+                Message = result == 1 ? "Inventory updated" : "Inventory not updated"
             };
         }
     }

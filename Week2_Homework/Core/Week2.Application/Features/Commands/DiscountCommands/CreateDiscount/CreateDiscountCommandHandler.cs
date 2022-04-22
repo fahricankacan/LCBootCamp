@@ -23,7 +23,7 @@ namespace Week2.Application.Features.Commands.DiscountCommands.CreateDiscount
 
         public async Task<CreateDiscountCommandResponse> Handle(CreateDiscountCommandRequest request, CancellationToken cancellationToken)
         {
-            var d = _discountReadRepository.GetSingleAsync(p => p.Name == request.Name);
+            var d =await _discountReadRepository.GetSingleAsync(p => p.Name == request.Name);
 
             if (d is not null)
             {
@@ -44,7 +44,8 @@ namespace Week2.Application.Features.Commands.DiscountCommands.CreateDiscount
                 IsActive = request.IsActive
             };
 
-            var result = await _discountWriteRepository.AddAsync(discount);
+             await _discountWriteRepository.AddAsync(discount);
+             var result = await _discountWriteRepository.SaveAsync() == 1 ? true:false;
 
             return new CreateDiscountCommandResponse
             {

@@ -6,10 +6,11 @@ using Week2.Application.Features.Commands.CategoryCommands.DeleteCategory;
 using Week2.Application.Features.Commands.CategoryCommands.UpdateCategory;
 using Week2.Application.Features.Queries.CategoryQueries.GetAllCategories;
 using Week2.Application.Features.Queries.CategoryQueries.GetByIdCategory;
+using Week2.Application.Features.Queries.CategoryQueries.SearchQuery;
 
 namespace Week2.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {
@@ -27,9 +28,9 @@ namespace Week2.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<GetByIdCategoryQueryResponse> GetById([FromQuery] GetByIdCategoryQueryRequest request)
+        public async Task<GetByIdCategoryQueryResponse> GetById(string id)
         {
-            return await _mediator.Send(request);
+            return await _mediator.Send(new GetByIdCategoryQueryRequest { Id = id });
         }
 
         [HttpPost]
@@ -38,16 +39,23 @@ namespace Week2.API.Controllers
             return await _mediator.Send(request);
         }
 
-        [HttpPut("{id}")]
-        public async Task<UpdateCategoryCommandResponse> UpdateProduct([FromBody] UpdateCategoryCommandRequest request)
+        [HttpPut]
+        public async Task<UpdateCategoryCommandResponse> UpdateProduct([FromForm] UpdateCategoryCommandRequest request)
         {
             return await _mediator.Send(request);
         }
 
         [HttpDelete("{id}")]
-        public async Task<DeleteCategoryCommandResponse> DeleteProduct([FromQuery] DeleteCategoryCommandRequest request)
+        public async Task<DeleteCategoryCommandResponse> DeleteProduct(string id)
+        {
+            return await _mediator.Send(new DeleteCategoryCommandRequest { Id = id });
+        }
+
+        [HttpGet("search")]
+        public async Task<IEnumerable<SearchCategoryQueryResponse>> SearchCategoryQuery([FromQuery] SearchCategoryQueryRequest request)
         {
             return await _mediator.Send(request);
         }
+
     }
 }

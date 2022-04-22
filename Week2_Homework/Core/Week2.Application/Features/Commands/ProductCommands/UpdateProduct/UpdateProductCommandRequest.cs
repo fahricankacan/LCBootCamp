@@ -11,12 +11,12 @@ namespace Week2.Application.Features.Commands.ProductCommands.UpdateProduct
     {
 
         public string Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-        public Guid CategoryId { get; set; }
-        public Guid InventoryId { get; set; }
-        public Guid DiscountId { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        public decimal? Price { get; set; }
+        public Guid? CategoryId { get; set; }
+        public Guid? InventoryId { get; set; }
+        public Guid? DiscountId { get; set; }
     }
 
 

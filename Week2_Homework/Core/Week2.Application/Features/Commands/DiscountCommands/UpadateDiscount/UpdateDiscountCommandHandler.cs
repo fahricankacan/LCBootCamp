@@ -22,7 +22,7 @@ namespace Week2.Application.Features.Commands.DiscountCommands.UpadateDiscount
 
         public async Task<UpdateDiscountCommandResponse> Handle(UpdateDiscountCommandRequest request, CancellationToken cancellationToken)
         {
-            var discount =await _discountReadRepository.GetByIdAsync(request.Id);
+            var discount = await _discountReadRepository.GetByIdAsync(request.Id);
 
             if (discount is null)
             {
@@ -33,11 +33,33 @@ namespace Week2.Application.Features.Commands.DiscountCommands.UpadateDiscount
                 };
             }
 
-            discount.Name = discount.Name != request.Name ? request.Name : discount.Name;
-            discount.Description = discount.Description != request.Description ? request.Description : discount.Description;
-            discount.DiscountPercent = discount.DiscountPercent != request.DiscountPercent ? request.DiscountPercent : discount.DiscountPercent;
-            discount.IsActive = discount.IsActive != request.IsActive ? request.IsActive : discount.IsActive;
+            var requestNameIsExist =await _discountReadRepository.GetSingleAsync(p => p.Name != request.Name) == null ? true : false;
 
+            if (requestNameIsExist)
+            {
+                return new UpdateDiscountCommandResponse
+                {
+                    Message = "Discount name is exist",
+                    Success = false
+                };
+            }
+
+            if(request.IsActive is null && request.DiscountPercent is null && request.Name is null &&
+                request.Description is null)
+            {
+                return new UpdateDiscountCommandResponse
+                {
+                    Success = false,
+                    Message = "There is no data to update"
+                };
+            }
+
+            discount.Name = request.Name ?? discount.Name; //discount.Name != request.Name ? request.Name : discount.Name;
+            discount.Description = request.Description ?? discount.Description;//discount.Description != request.Description ? request.Description : discount.Description;
+            discount.DiscountPercent = request.DiscountPercent ?? discount.DiscountPercent; //discount.DiscountPercent != request.DiscountPercent ? request.DiscountPercent : discount.DiscountPercent;
+            discount.IsActive = request.IsActive ?? discount.IsActive; //discount.IsActive != request.IsActive ? request.IsActive : discount.IsActive;
+
+            _discountWriteRepository.Update(discount);            
             var result = await _discountWriteRepository.SaveAsync();
 
             return new UpdateDiscountCommandResponse()

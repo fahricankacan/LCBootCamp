@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Week2.Application.Repositories.ProductRepository;
 using Week2.Domain.Entities;
+using System.Linq;
 
 namespace Week2.Application.Features.Commands.ProductCommands.CreateProduct
 {
@@ -36,11 +37,13 @@ namespace Week2.Application.Features.Commands.ProductCommands.CreateProduct
                 Description = request.Description,
                 Price = request.Price,
                 CategoryId = request.CategoryId,
-                InventoryId = request.InventoryId,
+                Inventory = new Inventory { Quantity = request.Inventory.Quentity },
                 DiscountId = request.DiscountId
             };
 
-            var result = await _productWriteRepository.AddAsync(product);
+            var result  = await _productWriteRepository.AddAsync(product);
+
+            await _productWriteRepository.SaveAsync();//== 1 ? true : false;
 
             return new CreateProductCommandResponse { Success = result, Message = result ? "Product created successfully" : "Product creation failed" };
         }

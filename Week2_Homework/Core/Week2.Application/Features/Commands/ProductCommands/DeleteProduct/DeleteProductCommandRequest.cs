@@ -10,7 +10,7 @@ namespace Week2.Application.Features.Commands.ProductCommands.DeleteProduct
 {
     public class DeleteProductCommandRequest : IRequest<DeleteProductCommandResponse>
     {
-        public Guid Id;
+        public string Id;
     }
 }
 

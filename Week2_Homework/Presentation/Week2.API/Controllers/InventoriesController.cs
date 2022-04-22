@@ -6,10 +6,11 @@ using Week2.Application.Features.Commands.InventoryCommands.DeleteIncentory;
 using Week2.Application.Features.Commands.InventoryCommands.UpdateInventory;
 using Week2.Application.Features.Queries.InventoryQueries.GetAllInventories;
 using Week2.Application.Features.Queries.InventoryQueries.GetByIdInventory;
+using Week2.Application.Features.Queries.InventoryQueries.SearchInventory;
 
 namespace Week2.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class InventoriesController : ControllerBase
     {
@@ -27,9 +28,10 @@ namespace Week2.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<GetByIdInventoryQueryResponse> GetById([FromQuery] GetByIdInventoryQueryRequest request)
+        public async Task<GetByIdInventoryQueryResponse> GetById(string id)
         {
-            return await _mediator.Send(request);
+
+            return await _mediator.Send(new GetByIdInventoryQueryRequest { Id = id });
         }
 
         [HttpPost]
@@ -38,14 +40,20 @@ namespace Week2.API.Controllers
             return await _mediator.Send(request);
         }
 
-        [HttpPut("{id}")]
-        public async Task<UpdateInventoryCommandResponse> UpdateProduct([FromBody] UpdateInventoryCommandRequest request)
+        [HttpPut]
+        public async Task<UpdateInventoryCommandResponse> UpdateProduct([FromForm] UpdateInventoryCommandRequest request)
         {
             return await _mediator.Send(request);
         }
 
         [HttpDelete("{id}")]
-        public async Task<DeleteInventoryCommandResponse> DeleteProduct([FromQuery] DeleteInventoryCommandRequest request)
+        public async Task<DeleteInventoryCommandResponse> DeleteProduct(string id)
+        {
+            return await _mediator.Send(new DeleteInventoryCommandRequest { Id = id });
+        }
+        
+        [HttpGet("search")]
+        public async Task<IEnumerable<SearchInventoryQueryResponse>> SearchInventory([FromQuery] SearchInventoryQueryRequest request)
         {
             return await _mediator.Send(request);
         }

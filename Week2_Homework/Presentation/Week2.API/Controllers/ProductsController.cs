@@ -6,16 +6,17 @@ using Week2.Application.Features.Commands.ProductCommands.DeleteProduct;
 using Week2.Application.Features.Commands.ProductCommands.UpdateProduct;
 using Week2.Application.Features.Queries.ProductQueries.GetAllProducts;
 using Week2.Application.Features.Queries.ProductQueries.GetByIdProduct;
+using Week2.Application.Features.Queries.ProductQueries.SearchProduct;
 
 namespace Week2.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         IMediator _mediator;
 
-        public ProductController(IMediator mediator)
+        public ProductsController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -27,10 +28,11 @@ namespace Week2.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<GetByIdProductQueryResponse> GetById([FromQuery] GetByIdProductQueryRequest request)
+        public async Task<GetByIdProductQueryResponse> GetById(string id)
         {
-            return await _mediator.Send(request);
+            return await _mediator.Send(new GetByIdProductQueryRequest { Id = id });
         }
+       
 
         [HttpPost]
         public async Task<CreateProductCommandResponse> CreateProduct([FromBody] CreateProductCommandRequest request)
@@ -38,16 +40,22 @@ namespace Week2.API.Controllers
             return await _mediator.Send(request);
         }
 
-        [HttpPut("{id}")]
-        public async Task<UpdateProductCommandResponse> UpdateProduct([FromBody] UpdateProductCommandRequest request)
+        [HttpPut]
+        public async Task<UpdateProductCommandResponse> UpdateProduct([FromForm] UpdateProductCommandRequest request)
         {
             return await _mediator.Send(request);
         }
 
         [HttpDelete("{id}")]
-        public async Task<DeleteProductCommandResponse> DeleteProduct([FromQuery] DeleteProductCommandRequest request)
+        public async Task<DeleteProductCommandResponse> DeleteProduct(string id)
+        {
+            return await _mediator.Send(new DeleteProductCommandRequest { Id = id });
+        }
+        [HttpGet("search")]
+        public async Task<IEnumerable<SearchProductQueryResponse>> Search([FromQuery] SearchProductQueryRequest request)
         {
             return await _mediator.Send(request);
         }
+       
     }
 }

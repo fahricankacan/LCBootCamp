@@ -32,11 +32,12 @@ namespace Week2.Application.Features.Commands.DiscountCommands.DeleteDiscount
                 };
             }
 
-            var result = _discountWriteRepository.Remove(discount);
+             _discountWriteRepository.Remove(discount);
+            var result = await _discountWriteRepository.SaveAsync() == 1 ? true : false;
 
             return new DeleteDiscountCommandResponse
             {
-                Message = "Discount deleted",
+                Message = result == true ? "Discount deleted" : "Discount not deleted",
                 Success = result
 
             };

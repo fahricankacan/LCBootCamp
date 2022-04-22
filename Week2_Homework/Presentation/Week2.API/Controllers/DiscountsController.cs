@@ -6,10 +6,11 @@ using Week2.Application.Features.Commands.DiscountCommands.DeleteDiscount;
 using Week2.Application.Features.Commands.DiscountCommands.UpadateDiscount;
 using Week2.Application.Features.Queries.DiscountQueries.GetAllDiscounts;
 using Week2.Application.Features.Queries.DiscountQueries.GetByIdDiscount;
+using Week2.Application.Features.Queries.DiscountQueries.SearchDiscountQueryHandler;
 
 namespace Week2.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     public class DiscountsController : ControllerBase
     {
@@ -27,9 +28,9 @@ namespace Week2.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<GetByIdDiscountQueryResponse> GetById([FromQuery] GetByIdDiscountQueryRequest request)
+        public async Task<GetByIdDiscountQueryResponse> GetById(string id)
         {
-            return await _mediator.Send(request);
+            return await _mediator.Send(new GetByIdDiscountQueryRequest { Id = id });
         }
 
         [HttpPost]
@@ -38,16 +39,23 @@ namespace Week2.API.Controllers
             return await _mediator.Send(request);
         }
 
-        [HttpPut("{id}")]
-        public async Task<UpdateDiscountCommandResponse> UpdateProduct([FromBody] UpdateDiscountCommandRequest request)
+        [HttpPut]
+        public async Task<UpdateDiscountCommandResponse> UpdateProduct([FromForm] UpdateDiscountCommandRequest request)
         {
             return await _mediator.Send(request);
         }
 
         [HttpDelete("{id}")]
-        public async Task<DeleteDiscountCommandResponse> DeleteProduct([FromQuery] DeleteDiscountCommandRequest request)
+        public async Task<DeleteDiscountCommandResponse> DeleteProduct(string id)
+        {
+            return await _mediator.Send(new DeleteDiscountCommandRequest { Id = id });
+        }
+
+        [HttpGet("search")]
+        public async Task<IEnumerable<SearchDiscountQueryResponse>> SearchDiscountQueries([FromQuery] SearchDiscountQueryRequest request)
         {
             return await _mediator.Send(request);
         }
+
     }
 }

@@ -33,16 +33,23 @@ namespace Week2.Application.Features.Queries.ProductQueries.GetAllProducts
             {
                 responseList.Add(new GetAllProductQueryResponse
                 {
+                    
                     Id = p.Id,
                     Name = p.Name,
                     Description = p.Description,
                     Price = p.Price,
                     CategoryName = p.Category.Name,
                     Quantity = p.Inventory.Quantity,
-                    DiscountPersantange = p.Discount.DiscountPercent
+                    DiscountPersantange = p.Discount.DiscountPercent,
+                    TotalPrice = CalculateTotalPrice(p.Price,p.Discount.DiscountPercent)
+
                 });
             }
             return responseList;
+        }
+        private decimal CalculateTotalPrice(decimal price, decimal discountPersantange)
+        {
+            return price - ((price * discountPersantange)/100);
         }
     }
 }

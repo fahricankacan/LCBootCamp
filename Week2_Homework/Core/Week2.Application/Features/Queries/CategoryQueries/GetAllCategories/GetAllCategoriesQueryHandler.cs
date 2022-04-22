@@ -12,12 +12,12 @@ using Week2.Application.Repositories.CategoryRepository;
 namespace Week2.Application.Features.Queries.CategoryQueries.GetAllCategories
 {
 
-    public class GetAllCategoriesQuery : IRequestHandler<GetAllCategoriesQueryRequest, IEnumerable<GetAllCategoriesQueryResponse>>
+    public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQueryRequest, IEnumerable<GetAllCategoriesQueryResponse>>
     {
         private readonly ICategoryReadRepository _categoryReadRepository;
         private readonly IMapper _mapper;
 
-        public GetAllCategoriesQuery(ICategoryReadRepository categoryReadRepository, IMapper mapper)
+        public GetAllCategoriesQueryHandler(ICategoryReadRepository categoryReadRepository, IMapper mapper)
         {
             _categoryReadRepository = categoryReadRepository;
             _mapper = mapper;

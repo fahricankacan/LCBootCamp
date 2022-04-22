@@ -10,7 +10,8 @@ namespace Week2.Application.Features.Commands.CategoryCommands.UpdateCategory
     public class UpdateCategoryCommandRequest : IRequest<UpdateCategoryCommandResponse>
     {
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
     }
 
 }

@@ -16,10 +16,11 @@ namespace Week2.Application.Features.Queries.DiscountQueries.GetAllDiscounts
         private readonly IDiscountReadRepository _discountReadRepository;
         private readonly IMapper _mapper;
 
-        public GetAllDiscountsQueryHandler(IDiscountReadRepository _discountReadRepository, IMapper mapper)
+        public GetAllDiscountsQueryHandler(IDiscountReadRepository _discountReadRepository, IMapper mapper, IDiscountReadRepository discountReadRepository)
         {
             _discountReadRepository = _discountReadRepository;
             _mapper = mapper;
+            this._discountReadRepository = discountReadRepository;
         }
 
         public async Task<IEnumerable<GetAllDiscountsQueryResponse>> Handle(GetAllDiscountsQueryRequest request, CancellationToken cancellationToken)

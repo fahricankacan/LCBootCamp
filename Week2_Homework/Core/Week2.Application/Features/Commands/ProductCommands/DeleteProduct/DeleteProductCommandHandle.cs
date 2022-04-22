@@ -8,14 +8,15 @@ namespace Week2.Application.Features.Commands.ProductCommands.DeleteProduct
         private readonly IProductWriteRepository _productWriteRepository;
         private readonly IProductReadRepository _productReadRepository;
 
-        public DeleteProductCommandHandle(IProductWriteRepository productWriteRepository)
+        public DeleteProductCommandHandle(IProductWriteRepository productWriteRepository, IProductReadRepository productReadRepository)
         {
             _productWriteRepository = productWriteRepository;
+            _productReadRepository = productReadRepository;
         }
 
         public async Task<DeleteProductCommandResponse> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
-            var product = await _productReadRepository.GetSingleAsync(p => p.Id == request.Id);
+            var product = await _productReadRepository.GetByIdAsync(request.Id);
 
             if (product is null)
             {
@@ -26,12 +27,13 @@ namespace Week2.Application.Features.Commands.ProductCommands.DeleteProduct
                 };
             }
 
-            var result = _productWriteRepository.Remove(product);
-            await _productWriteRepository.SaveAsync();
+             _productWriteRepository.Remove(product);
+            
+            var result = await _productWriteRepository.SaveAsync() == 1 ? true : false;
 
             return new DeleteProductCommandResponse
             {
-                Message = "Product deleted.",
+                Message = result == true ? "Product deleted" : "Product not deleted",
                 Succes = result
             };
 

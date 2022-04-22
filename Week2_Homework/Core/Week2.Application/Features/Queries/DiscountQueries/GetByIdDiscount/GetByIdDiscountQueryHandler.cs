@@ -15,10 +15,10 @@ namespace Week2.Application.Features.Queries.DiscountQueries.GetByIdDiscount
         private readonly IDiscountReadRepository _discountReadRepository;
         private readonly IMapper _mapper;
 
-        public GetByIdDiscountQueryHandler(IDiscountReadRepository _discountReadRepository, IMapper mapper)
-        {
-            _discountReadRepository = _discountReadRepository;
+        public GetByIdDiscountQueryHandler(IDiscountReadRepository _discountReadRepository, IMapper mapper, IDiscountReadRepository discountReadRepository)
+        {       
             _mapper = mapper;
+            this._discountReadRepository = discountReadRepository;
         }
 
         public async Task<GetByIdDiscountQueryResponse> Handle(GetByIdDiscountQueryRequest request, CancellationToken cancellationToken)

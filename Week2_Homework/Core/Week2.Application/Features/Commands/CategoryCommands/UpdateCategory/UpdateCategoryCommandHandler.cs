@@ -26,7 +26,20 @@ namespace Week2.Application.Features.Commands.CategoryCommands.UpdateCategory
                 };
             }
 
-            category.Name = request.Name;
+            if(request.Name is null && request.Description is null)
+            {
+                return new UpdateCategoryCommandResponse
+                {
+                    Success = false,
+                    Message = "There is a no data to update"
+                };
+            }
+
+            category.Name = request.Name ?? category.Name;
+
+            category.Description = request.Description ?? category.Description;
+            //category.Description != request.Description && request.Description !=null ? request.Description : category.Description;
+
             await _categoryWriteRepository.SaveAsync();
 
             return new UpdateCategoryCommandResponse

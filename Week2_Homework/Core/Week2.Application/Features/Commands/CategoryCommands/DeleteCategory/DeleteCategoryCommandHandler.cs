@@ -15,6 +15,13 @@ namespace Week2.Application.Features.Commands.CategoryCommands.DeleteCategory
         private readonly ICategoryReadRepository _categoryReadRepository;
         private readonly ICategoryWriteRepository _categoryWriteRepository;
 
+        public DeleteCategoryCommandHandler(ICategoryReadRepository categoryReadRepository, ICategoryWriteRepository categoryWriteRepository)
+        {
+            _categoryReadRepository = categoryReadRepository;
+            _categoryWriteRepository = categoryWriteRepository;
+        }
+
+
         public async Task<DeleteCategoryCommandResponse> Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
         {
             var category = await _categoryReadRepository.GetByIdAsync(request.Id);
@@ -28,6 +35,8 @@ namespace Week2.Application.Features.Commands.CategoryCommands.DeleteCategory
             }
 
             _categoryWriteRepository.Remove(category);
+            await _categoryWriteRepository.SaveAsync();
+
             return new DeleteCategoryCommandResponse
             {
                 Success = true,
